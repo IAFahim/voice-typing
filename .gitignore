@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Whisper model cache
+*.ct2/
+
+# Virtual environment
+bin/
+lib/
+pyvenv.cfg
+include/
+share/
+
+# Logs
+*.log
+
+# Temp files
+/tmp/
+*.wav
+*.tmp
+*.lock
+voice_typing_*
+voice_paste_*
+voice_test_*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
