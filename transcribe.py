@@ -1,6 +1,7 @@
 #!/home/i/voice-typing/bin/python3
 import sys
 import os
+import shlex
 from faster_whisper import WhisperModel
 
 WAVFILE = "/tmp/voice_typing_audio.wav"

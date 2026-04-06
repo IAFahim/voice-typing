@@ -2,10 +2,10 @@
 LOCK="/tmp/voice_typing_recording.lock"
 DEBOUNCE="/tmp/voice_typing_debounce"
 WAV="/tmp/voice_typing_audio.wav"
+RESULT="/tmp/voice_typing_result.txt"
 LOG="/home/i/voice-typing/voice_type.log"
 PYTHON="/home/i/voice-typing/bin/python3"
 TRANSCRIBE="/home/i/voice-typing/transcribe.py"
-RESULT="/tmp/voice_typing_result.txt"
 
 ts() { date '+%H:%M:%S'; }
 
@@ -39,14 +39,11 @@ if [ -f "$LOCK" ]; then
         rm -f "$RESULT"
         $PYTHON "$TRANSCRIBE" >> "$LOG" 2>&1
 
-        # Paste right here in the shortcut's own process context
         if [ -f "$RESULT" ]; then
             TEXT=$(cat "$RESULT")
             if [ -n "$TEXT" ]; then
-                echo "[$(ts)] Pasting: $TEXT" >> "$LOG"
-                printf '%s' "$TEXT" | xclip -selection clipboard
-                sleep 0.1
-                xdotool key --clearmodifiers ctrl+v
+                echo "[$(ts)] Typing: $TEXT" >> "$LOG"
+                YDOTOOL_SOCKET=/tmp/.ydotool_socket ydotool type --key-delay 20 "$TEXT"
             fi
         fi
     else
